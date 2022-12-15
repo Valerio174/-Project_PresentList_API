@@ -14,8 +14,18 @@ public class ProjectConnection {
 	private ProjectConnection(){
 		try{
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			String url = "jdbc:oracle:thin:@//193.190.64.10:1522/XEPDB1";
-			instance = DriverManager.getConnection(url);
+			String ip = "193.190.64.10";
+			String port = "1522";
+			String service_name = "XEPDB1";
+			String chaineConnexion = "jdbc:oracle:thin:@//"+ip+":"+port+"/"+service_name;
+			String username = "student03_03";
+			String password = "changeme";
+			 
+			instance = DriverManager.getConnection(
+					chaineConnexion,
+					username,
+					password
+					);
 		}
 		catch(ClassNotFoundException ex){
 			JOptionPane.showMessageDialog(null, "Driver class not found" + ex.getMessage());
@@ -36,4 +46,6 @@ public class ProjectConnection {
 		}
 		return instance;
 	}
+	
+ 
 }
