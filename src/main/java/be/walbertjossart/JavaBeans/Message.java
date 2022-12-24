@@ -9,11 +9,11 @@ public class Message implements Serializable {
 	private static final long serialVersionUID = -1676868000897287743L;
  	private int id_message;
 	private String content; 
-	private Users users;
+	private Users_API users;
 	
 	/*Constructor(s)*/
 	public Message() {}
-	public Message(int id_message, String content, Users users) {
+	public Message(int id_message, String content, Users_API users) {
 		this.id_message = id_message;
 		this.content =content;
 		this.users = users;
@@ -32,10 +32,10 @@ public class Message implements Serializable {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Users getUsers() {
+	public Users_API getUsers() {
 		return users;
 	}
-	public void setUsers(Users users) {
+	public void setUsers(Users_API users) {
 		this.users = users;
 	}
 	
