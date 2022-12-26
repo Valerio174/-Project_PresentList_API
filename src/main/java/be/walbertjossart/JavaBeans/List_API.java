@@ -1,25 +1,31 @@
 package be.walbertjossart.JavaBeans;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class List implements Serializable{
+import be.walbertjossart.DAO.AbstractDAOFactory_API;
+import be.walbertjossart.DAO.DAO;
+
+public class List_API implements Serializable{
 
 	/*Attributs*/
 	private static final long serialVersionUID = 6880376709357849747L;
 	private int id_list;
 	private LocalDate limit_date;
 	private String occasion;
-	private boolean state;
-	private ArrayList<Present> presents;
+	private String state;
+	private ArrayList<Present_API> presents;
 	private Users_API owner;
 	private ArrayList<Users_API> guests;
+	static AbstractDAOFactory_API adf = AbstractDAOFactory_API.getFactory(AbstractDAOFactory_API.DAO_FACTORY);
+	static DAO<List_API> listDAO = adf.getListDAO_API();
 	
 	/*Constructor(s)*/
-	public List() {}
+	public List_API() {}
 
-	public List(int id_list, LocalDate limit_date, String occasion, boolean state, Users_API owner, Users_API guest, Present present) {
+	public List_API(int id_list, LocalDate limit_date, String occasion, String state, Users_API owner, Users_API guest, Present_API present) {
 		this.id_list = id_list;
 		this.limit_date = limit_date;
 		this.occasion = occasion;
@@ -50,10 +56,10 @@ public class List implements Serializable{
 	public void setOccasion(String occasion) {
 		this.occasion = occasion;
 	}
-	public boolean isState() {
+	public String getState() {
 		return state;
 	}
-	public void setState(boolean state) {
+	public void setState(String state) {
 		this.state = state;
 	}
 
@@ -73,15 +79,21 @@ public class List implements Serializable{
 		this.guests = guests;
 	}
 
-	public ArrayList<Present> getPresents() {
+	public ArrayList<Present_API> getPresents() {
 		return presents;
 	}
 
-	public void setPresents(ArrayList<Present> presents) {
+	public void setPresents(ArrayList<Present_API> presents) {
 		this.presents = presents;
 	}
 	
 	
 	/*Methods*/
+	public boolean insertList() throws SQLException {
+		return listDAO.create(this);
+	}
+	public static ArrayList<List_API> getAll(){
+		return listDAO.findAll();
+	}
 	
 }

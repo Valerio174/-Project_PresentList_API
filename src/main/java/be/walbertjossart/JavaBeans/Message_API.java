@@ -3,7 +3,7 @@ package be.walbertjossart.JavaBeans;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Message implements Serializable {
+public class Message_API implements Serializable {
 
 	/*Attributs*/
 	private static final long serialVersionUID = -1676868000897287743L;
@@ -12,8 +12,8 @@ public class Message implements Serializable {
 	private Users_API users;
 	
 	/*Constructor(s)*/
-	public Message() {}
-	public Message(int id_message, String content, Users_API users) {
+	public Message_API() {}
+	public Message_API(int id_message, String content, Users_API users) {
 		this.id_message = id_message;
 		this.content =content;
 		this.users = users;

@@ -3,7 +3,7 @@ package be.walbertjossart.JavaBeans;
 import java.awt.Image;
 import java.io.Serializable;
 
-public class Present implements Serializable{
+public class Present_API implements Serializable{
 
 	/*Attributs*/
 	private static final long serialVersionUID = -2220492601912596085L;
@@ -15,7 +15,7 @@ public class Present implements Serializable{
 	private int state;
 	private String link;
 	private Image image;
-	private List list;
+	private List_API list;
 	
 	/*Getters/Setters*/
 	public int getId_present() {
@@ -66,17 +66,17 @@ public class Present implements Serializable{
 	public void setImage(Image image) {
 		this.image = image;
 	}
-	public List getList() {
+	public List_API getList() {
 		return list;
 	}
-	public void setList(List list) {
+	public void setList(List_API list) {
 		this.list = list;
 	}
 	
 	/*Constructor(s)*/
 	/*With ALL attributs*/
-	public Present(int id_present, String name, String description, double average_price, int priority, int state,
-			String link, Image image, List list) {
+	public Present_API(int id_present, String name, String description, double average_price, int priority, int state,
+			String link, Image image, List_API list) {
  		this.id_present = id_present;
 		this.name = name;
 		this.description = description;
@@ -88,8 +88,8 @@ public class Present implements Serializable{
 		this.list =list;
 	}
 	/*Without link*/
-	public Present(int id_present, String name, String description, double average_price, int priority, int state,
-			  Image image, List list) {
+	public Present_API(int id_present, String name, String description, double average_price, int priority, int state,
+			  Image image, List_API list) {
  		this.id_present = id_present;
 		this.name = name;
 		this.description = description;
@@ -100,8 +100,8 @@ public class Present implements Serializable{
 		this.list =list;
 	}
 	/*Without image*/
-	public Present(int id_present, String name, String description, double average_price, int priority, int state,
-			String link, List list) {
+	public Present_API(int id_present, String name, String description, double average_price, int priority, int state,
+			String link, List_API list) {
  		this.id_present = id_present;
 		this.name = name;
 		this.description = description;
@@ -112,8 +112,8 @@ public class Present implements Serializable{
  		this.list =list;
 	}
 	/*Without link AND image*/
-	public Present(int id_present, String name, String description, double average_price, int priority, int state,
-			List list) {
+	public Present_API(int id_present, String name, String description, double average_price, int priority, int state,
+			List_API list) {
  		this.id_present = id_present;
 		this.name = name;
 		this.description = description;
