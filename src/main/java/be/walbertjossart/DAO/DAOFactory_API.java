@@ -2,9 +2,9 @@ package be.walbertjossart.DAO;
 
 import java.sql.Connection;
 
-import be.walbertjossart.JavaBeans.List;
-import be.walbertjossart.JavaBeans.Message;
-import be.walbertjossart.JavaBeans.Present;
+import be.walbertjossart.JavaBeans.List_API;
+import be.walbertjossart.JavaBeans.Message_API;
+import be.walbertjossart.JavaBeans.Present_API;
 import be.walbertjossart.JavaBeans.Users_API;
  
 public class DAOFactory_API extends AbstractDAOFactory_API{
@@ -14,15 +14,15 @@ public class DAOFactory_API extends AbstractDAOFactory_API{
 		return new UsersDAO_API(conn);
 	}
 	
-	public DAO<List> getListDAO_API(){
+	public DAO<List_API> getListDAO_API(){
 		return new ListDAO_API(conn);
 	}
 	
-	public DAO<Message> getMessageDAO_API(){
+	public DAO<Message_API> getMessageDAO_API(){
 		return new MessageDAO_API(conn);
 	}
 	
-	public DAO<Present> getPresentDAO_API() {
+	public DAO<Present_API> getPresentDAO_API() {
 		return new PresentDAO_API(conn);
 	}
 

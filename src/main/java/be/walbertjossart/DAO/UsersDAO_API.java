@@ -12,7 +12,7 @@ public class UsersDAO_API extends DAO<Users_API>{
 	private static UsersDAO_API instance;
 
 
-	public static UsersDAO_API getInstance() {
+	public UsersDAO_API getInstance() {
 		if(instance == null) {
 			instance = new UsersDAO_API(connect);
 		}
@@ -24,8 +24,7 @@ public class UsersDAO_API extends DAO<Users_API>{
 
 	@Override
 	public boolean create(Users_API users) throws SQLException {
-		CallableStatement stmt = connect.prepareCall("{call Insert_user(?,?,?,?)}");	/*Modifier la procedure 
-		stockée envoyé par discord(lui attribuer un return en parametres + un return dans le corps de la procedure)*/
+		CallableStatement stmt = connect.prepareCall("{call Insert_user(?,?,?,?)}");	 
 		
 		stmt.setString(1, users.getPseudo());
 		stmt.setString(2, users.getPassword());
@@ -99,6 +98,30 @@ public class UsersDAO_API extends DAO<Users_API>{
 		}
 		
 		return all_users;
+	}
+	
+
+	/******PARTICULAR METHODS FOR Users*******/
+	
+	public Users_API GetUser(String pseudo, String password) {
+		 
+		try{
+			ResultSet result = this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT id_users, pseudo, password, email "
+							+ "FROM Users WHERE pseudo = '" + pseudo + "' AND password = ora_hash('" + password +"')");
+			if(result.first()) {
+				Users_API users = new Users_API(result.getInt("id_users"), result.getString("pseudo"), result.getString("password"), result.getString("email"));
+					return users;
+				}
+			else
+				return null;
+		
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 	 
 	

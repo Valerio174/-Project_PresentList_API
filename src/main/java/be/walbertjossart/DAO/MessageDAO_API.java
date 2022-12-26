@@ -3,9 +3,9 @@ package be.walbertjossart.DAO;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import be.walbertjossart.JavaBeans.Message;
+import be.walbertjossart.JavaBeans.Message_API;
 
-public class MessageDAO_API extends DAO<Message> {
+public class MessageDAO_API extends DAO<Message_API> {
 
 	public MessageDAO_API(Connection conn) {
 		super(conn);
@@ -13,31 +13,31 @@ public class MessageDAO_API extends DAO<Message> {
 	}
 
 	@Override
-	public boolean create(Message obj) {
+	public boolean create(Message_API obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean delete(Message obj) {
+	public boolean delete(Message_API obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean update(Message obj) {
+	public boolean update(Message_API obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public Message find(int id) {
+	public Message_API find(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArrayList<Message> findAll() {
+	public ArrayList<Message_API> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
