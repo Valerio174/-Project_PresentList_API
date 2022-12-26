@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import be.walbertjossart.DAO.AbstractDAOFactory_API;
 import be.walbertjossart.DAO.DAO;
+import be.walbertjossart.DAO.UsersDAO_API;
  
 public class Users_API implements Serializable {
 	
@@ -15,9 +16,9 @@ public class Users_API implements Serializable {
 	private String pseudo;
 	private String password;
 	private String email;
-	private ArrayList<List>own_lists;
-	private ArrayList<List>as_guest_lists;
-	private ArrayList<List>messages;
+	private ArrayList<List_API>own_lists;
+	private ArrayList<List_API>as_guest_lists;
+	private ArrayList<List_API>messages;
 	static AbstractDAOFactory_API adf = AbstractDAOFactory_API.getFactory(AbstractDAOFactory_API.DAO_FACTORY);
 	static DAO<Users_API> usersDAO = adf.getUsersDAO_API();
 	
@@ -66,27 +67,36 @@ public class Users_API implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public ArrayList<List> getOwn_lists() {
+	public ArrayList<List_API> getOwn_lists() {
 		return own_lists;
 	}
-	public void setOwn_lists(ArrayList<List> own_lists) {
+	public void setOwn_lists(ArrayList<List_API> own_lists) {
 		this.own_lists = own_lists;
 	}
-	public ArrayList<List> getAs_guest_lists() {
+	public ArrayList<List_API> getAs_guest_lists() {
 		return as_guest_lists;
 	}
-	public void setAs_guest_lists(ArrayList<List> as_guest_lists) {
+	public void setAs_guest_lists(ArrayList<List_API> as_guest_lists) {
 		this.as_guest_lists = as_guest_lists;
 	}
-	public ArrayList<List> getMessages() {
+	public ArrayList<List_API> getMessages() {
 		return messages;
 	}
-	public void setMessages(ArrayList<List> messages) {
+	public void setMessages(ArrayList<List_API> messages) {
 		this.messages = messages;
 	}
 
 	
 	/*Methods*/
+	public static Users_API GetUser(String pseudo, String password) {
+		UsersDAO_API users = (UsersDAO_API)usersDAO;
+		
+		if(users.GetUser(pseudo, password) != null) {
+			return (users.GetUser(pseudo, password));
+		}
+		return null;
+	}
+	
 	public boolean insertUsers() throws SQLException {
 		return usersDAO.create(this);
 	}
