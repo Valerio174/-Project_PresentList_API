@@ -1,9 +1,12 @@
 package be.walbertjossart.JavaBeans;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 import be.walbertjossart.DAO.AbstractDAOFactory_API;
 import be.walbertjossart.DAO.DAO;
@@ -92,8 +95,19 @@ public class List_API implements Serializable{
 	public boolean insertList() throws SQLException {
 		return listDAO.create(this);
 	}
-	public static ArrayList<List_API> getAll(){
+	public static ArrayList<List_API> getAll() throws SQLException, JsonProcessingException{
 		return listDAO.findAll();
+	}
+	
+	public List_API ConvertObject(ArrayList<Object> list_objects, Users_API user) {
+		List_API list_api = new List_API();
+		list_api.setId_list(Integer.parseInt(list_objects.get(0).toString()));
+		list_api.setLimit_date(Date.valueOf(list_objects.get(1).toString()).toLocalDate());
+		list_api.setOccasion(String.valueOf(list_objects.get(2).toString()));
+ 		list_api.setState(String.valueOf(list_objects.get(3).toString()));
+  		list_api.setOwner(user);
+  		
+		return list_api;
 	}
 	
 }

@@ -14,6 +14,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import be.walbertjossart.JavaBeans.List_API;
 import be.walbertjossart.JavaBeans.Users_API;
 
@@ -22,7 +24,7 @@ public class ListAPI {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getAll(){
+	public Response getAll() throws SQLException, JsonProcessingException{
 		ArrayList<List_API> lists = List_API.getAll();
 		
 		return Response.status(Status.OK).entity(lists).build();

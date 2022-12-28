@@ -2,6 +2,10 @@ package be.walbertjossart.JavaBeans;
 
 import java.awt.Image;
 import java.io.Serializable;
+import java.sql.SQLException;
+
+import be.walbertjossart.DAO.AbstractDAOFactory_API;
+import be.walbertjossart.DAO.DAO;
 
 public class Present_API implements Serializable{
 
@@ -16,6 +20,8 @@ public class Present_API implements Serializable{
 	private String link;
 	private Image image;
 	private List_API list;
+	static AbstractDAOFactory_API adf = AbstractDAOFactory_API.getFactory(AbstractDAOFactory_API.DAO_FACTORY);
+	static DAO<Present_API> presentDAO = adf.getPresentDAO_API();
 	
 	/*Getters/Setters*/
 	public int getId_present() {
@@ -74,6 +80,7 @@ public class Present_API implements Serializable{
 	}
 	
 	/*Constructor(s)*/
+	public Present_API() {}
 	/*With ALL attributs*/
 	public Present_API(int id_present, String name, String description, double average_price, int priority, int state,
 			String link, Image image, List_API list) {
@@ -120,9 +127,12 @@ public class Present_API implements Serializable{
 		this.average_price = average_price;
 		this.priority = priority;
 		this.state = state;
-		this.link = link;
- 		this.list =list;
+  		this.list =list;
 	}
 	
+
 	/*Methods*/
+	public boolean insertPresent() throws SQLException {
+		return presentDAO.create(this);
+	}
 }

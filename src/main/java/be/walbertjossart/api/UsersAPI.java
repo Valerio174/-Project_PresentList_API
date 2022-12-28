@@ -3,6 +3,7 @@ package be.walbertjossart.api;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -11,6 +12,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 import be.walbertjossart.JavaBeans.Users_API;
  
@@ -24,7 +27,7 @@ public class UsersAPI {
 							  @FormParam("password")String password) {
 		Users_API users = Users_API.GetUser(pseudo, password);
 		if(users == null) {
-			return Response.status(Status.NOT_FOUND).entity("Account not found. Pseudo/password maybe not correct").build();	/*A modifier pour gérer le cas ou pseudo ou password incorrectes*/
+			return Response.status(Status.NOT_FOUND).build();	/*A modifier pour gérer le cas ou pseudo ou password incorrectes*/
 		}
 		return Response
 				.status(Status.OK)
@@ -35,7 +38,7 @@ public class UsersAPI {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getAll(){
+	public Response getAll() throws SQLException, JsonProcessingException{
 		ArrayList<Users_API> users = Users_API.getAll();
 		
 		return Response.status(Status.OK).entity(users).build();

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import be.walbertjossart.DAO.AbstractDAOFactory_API;
 import be.walbertjossart.DAO.DAO;
 import be.walbertjossart.DAO.UsersDAO_API;
@@ -18,7 +20,7 @@ public class Users_API implements Serializable {
 	private String email;
 	private ArrayList<List_API>own_lists;
 	private ArrayList<List_API>as_guest_lists;
-	private ArrayList<List_API>messages;
+	private ArrayList<Message_API>messages;
 	static AbstractDAOFactory_API adf = AbstractDAOFactory_API.getFactory(AbstractDAOFactory_API.DAO_FACTORY);
 	static DAO<Users_API> usersDAO = adf.getUsersDAO_API();
 	
@@ -79,10 +81,10 @@ public class Users_API implements Serializable {
 	public void setAs_guest_lists(ArrayList<List_API> as_guest_lists) {
 		this.as_guest_lists = as_guest_lists;
 	}
-	public ArrayList<List_API> getMessages() {
+	public ArrayList<Message_API> getMessages() {
 		return messages;
 	}
-	public void setMessages(ArrayList<List_API> messages) {
+	public void setMessages(ArrayList<Message_API> messages) {
 		this.messages = messages;
 	}
 
@@ -100,17 +102,20 @@ public class Users_API implements Serializable {
 	public boolean insertUsers() throws SQLException {
 		return usersDAO.create(this);
 	}
-	public static ArrayList<Users_API> getAll(){
+	public boolean updateUsers() throws SQLException {
+		return usersDAO.update(this);
+	}
+	public static ArrayList<Users_API> getAll() throws SQLException, JsonProcessingException{
 		return usersDAO.findAll();
 	}
-//	public void AddOwnList(List new_list) {
-//		own_lists.add(new_list);
-//	}
-//	
-//	public void AddListAsGuest(List new_list) {
-//		as_guest_lists.add(new_list);
-//	}
-//	public void AddMessage(Message new_message) {
-//	as_guest_lists.add(new_message);
-//}
+	public void AddOwnList(List_API new_list) {
+		own_lists.add(new_list);
+	}
+	
+	public void AddListAsGuest(List_API new_list) {
+		as_guest_lists.add(new_list);
+	}
+	public void AddMessage(Message_API new_message) {
+		messages.add(new_message);
+}
 }
